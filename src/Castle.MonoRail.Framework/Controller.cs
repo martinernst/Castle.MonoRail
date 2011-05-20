@@ -2030,7 +2030,7 @@ namespace Castle.MonoRail.Framework
 			return clone;
 		}
 
-		private bool ProcessFilters(IExecutableAction action, ExecuteWhen when)
+		protected virtual bool ProcessFilters(IExecutableAction action, ExecuteWhen when)
 		{
 
 			foreach(var desc in filters.Union(GetActionLevelFilters(action)))
@@ -2057,7 +2057,7 @@ namespace Castle.MonoRail.Framework
 			return action.ActionLevelFilters.OrderBy(descriptor => descriptor.ExecutionOrder);
 		}
 
-		private bool ProcessFilter(ExecuteWhen when, FilterDescriptor desc)
+		protected virtual bool ProcessFilter(ExecuteWhen when, FilterDescriptor desc)
 		{
 			if (desc.FilterInstance == null)
 			{
