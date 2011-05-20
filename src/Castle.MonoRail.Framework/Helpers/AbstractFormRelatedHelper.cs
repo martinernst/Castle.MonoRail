@@ -478,7 +478,7 @@ namespace Castle.MonoRail.Framework.Helpers
 			{
 				if (logger.IsErrorEnabled)
 				{
-					logger.Error("No public property '{0}' found on type '{1}'", property, type.FullName);
+					logger.ErrorFormat("No public property '{0}' found on type '{1}'", property, type.FullName);
 				}
 
 				return null;
@@ -1020,7 +1020,7 @@ namespace Castle.MonoRail.Framework.Helpers
 		/// </summary>
 		public class ReflectionValueGetter : ValueGetter
 		{
-			private PropertyInfo propInfo;
+		    private MethodInfo _getter;
 
 			/// <summary>
 			/// Initializes a new instance of the <see cref="ReflectionValueGetter"/> class.
@@ -1028,7 +1028,7 @@ namespace Castle.MonoRail.Framework.Helpers
 			/// <param name="propInfo">The prop info.</param>
 			public ReflectionValueGetter(PropertyInfo propInfo)
 			{
-				this.propInfo = propInfo;
+			    this._getter = propInfo.GetGetMethod().GetBaseDefinition();
 			}
 
 			/// <summary>
@@ -1037,7 +1037,7 @@ namespace Castle.MonoRail.Framework.Helpers
 			/// <value>The name.</value>
 			public override string Name
 			{
-				get { return propInfo.Name; }
+				get { return _getter.Name.Substring(4); }
 			}
 
 			/// <summary>
@@ -1049,7 +1049,7 @@ namespace Castle.MonoRail.Framework.Helpers
 			{
 				try
 				{
-					return propInfo.GetValue(instance, null);
+				    return _getter.Invoke(instance, null);
 				}
 				catch (TargetException)
 				{
