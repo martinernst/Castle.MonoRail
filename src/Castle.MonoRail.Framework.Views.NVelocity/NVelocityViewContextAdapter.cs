@@ -117,6 +117,15 @@ namespace Castle.MonoRail.Framework.Views.NVelocity
 			return sections != null && sections.Contains(sectionName);
 		}
 
+        /// <summary>
+        /// Determines whether the current component declaration on the view
+        /// has a body
+        /// </summary>
+        public bool HasBody
+        {
+            get { return bodyNode != null && bodyNode.Type == 10; }
+        }
+
 		/// <summary>
 		/// Renders the component body.
 		/// </summary>

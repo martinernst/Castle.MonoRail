@@ -39,6 +39,11 @@ namespace Castle.MonoRail.Framework
 		/// </returns>
 		bool HasSection(String sectionName);
 
+        /// <summary>
+        /// Determines whether the componeny has a body
+        /// </summary>
+        bool HasBody { get; }
+
 		/// <summary>
 		/// Renders the view specified to the writer. This is any view, 
 		/// not tied to the components view. 

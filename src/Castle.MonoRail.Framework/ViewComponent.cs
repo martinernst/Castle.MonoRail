@@ -394,6 +394,13 @@ namespace Castle.MonoRail.Framework
 			return context.HasSection(sectionName);
 		}
 
+        /// <summary>
+        /// Determines whether the current component declaration on the view has a body
+        /// </summary>
+        protected bool HasBody
+        {
+            get { return context.HasBody; }
+        }
 		/// <summary>
 		/// Renders the component body.
 		/// </summary>

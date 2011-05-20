@@ -112,6 +112,14 @@ namespace Castle.MonoRail.Framework.Test
 			return section2delegate.ContainsKey(sectionName);
 		}
 
+        /// <summary>
+        /// Determines if the component has a body
+        /// </summary>
+        public bool HasBody
+        {
+            get { return true; }
+        }
+
 		/// <summary>
 		/// Renders the view specified to the writer.
 		/// </summary>

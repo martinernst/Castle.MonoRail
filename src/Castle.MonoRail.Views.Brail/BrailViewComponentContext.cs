@@ -110,6 +110,11 @@ namespace Castle.MonoRail.Views.Brail
 			return sections != null && sections.Contains(sectionName);
 		}
 
+        public bool HasBody
+        {
+            get { return body != null; }
+        }
+
 		public void RenderSection(string sectionName)
 		{
 			RenderSection(sectionName, default_writer);
@@ -124,9 +129,12 @@ namespace Castle.MonoRail.Views.Brail
 		{
 			if (HasSection(sectionName) == false)
 				return; //matching the NVelocity behavior, but maybe should throw?
-			var callable = (ICallable) sections[sectionName];
-			callable.Call(new object[] {writer});
-		}
+            using (parent.SetOutputStream(writer))
+            {
+                ICallable callable = (ICallable)sections[sectionName];
+                callable.Call(new object[] { writer });
+            }
+        }
 
 		public IViewEngine ViewEngine
 		{

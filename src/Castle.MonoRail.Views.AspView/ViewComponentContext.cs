@@ -79,6 +79,11 @@ namespace Castle.MonoRail.Views.AspView
 			return sections != null && sections.Contains(sectionName);
 		}
 
+        public bool HasBody
+        {
+            get { return body != null; }
+        }
+
 		public void RenderBody()
 		{
 			AssertHasBody();
