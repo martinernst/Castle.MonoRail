@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 
 namespace Castle.MonoRail.WindsorExtension
 {
@@ -86,7 +87,8 @@ namespace Castle.MonoRail.WindsorExtension
 		{
 			public IServiceProviderEx LocateProvider()
 			{
-				return WindsorContainerAccessorUtil.ObtainContainer();
+                var container = WindsorContainerAccessorUtil.ObtainContainer();
+			    return new WindsorServiceProvider(container);
 			}
 		}
 	}
