@@ -725,9 +725,16 @@ namespace Castle.MonoRail.Framework.Helpers
 				update = elementId + "autocomplete";
 			}
 
+            var jsClass = (String)options["jsClass"];
+            options.Remove("jsClass");
+            if (jsClass == null)
+            {
+                jsClass = "Ajax.Autocompleter";
+            }
+
 			sb.Append("<script type=\"text/javascript\">");
 
-			sb.AppendFormat( "new Ajax.Autocompleter('{0}', '{1}', '{2}'", elementId, update, url );
+		    sb.AppendFormat("new {0}('{1}', '{2}', '{3}'", jsClass, elementId, update, url);
 
 			if (options.Contains("tokens"))
 			{
@@ -966,7 +973,7 @@ namespace Castle.MonoRail.Framework.Helpers
 
 			if (!options.Contains("with") && options.Contains("form"))
 			{
-				jsOptions["parameters"] = "Form.serialize(this)";
+                jsOptions["parameters"] = "Form.serialize('" + options["form"] + "')";
 			}
 			else if (options.Contains("with"))
 			{
